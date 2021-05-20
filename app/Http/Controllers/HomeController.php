@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(auth()->user()->interedted_in == 'Both'){
+            $users = User::where('interested_in', '=', auth()->user()->gender || 'Both')->where('id', '!=', auth()->user()->id)->exists();
+        }
+        else{
+            $users = User::where('interested_in', '=', auth()->user()->gender)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->exists();
+        }
+
+        return view('users.home', compact('users'));
     }
 }

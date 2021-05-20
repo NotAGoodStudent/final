@@ -12,7 +12,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -53,7 +54,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('updateProfile')}}">
                                         <span class="icon">
                                         <i class="fas fa-user-circle" style="color:#2ecc71;font-weight: bold; margin-right: 3px"></i>
                                         </span>Edit profile</a>

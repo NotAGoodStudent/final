@@ -2,6 +2,16 @@
 
 return [
 
+    'providers' => [
+
+        Stevebauman\Location\LocationServiceProvider::class,
+    ],
+
+    'aliases' => [
+
+        'Location' => 'Stevebauman\Location\Facades\Location',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -228,5 +238,4 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
 ];

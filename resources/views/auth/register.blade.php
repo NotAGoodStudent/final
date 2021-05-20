@@ -39,6 +39,7 @@
                 <select name="gender" id="gender">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
+                    <option value="Other">Other</option>
                 </select>
                 <br>
                 <a class="forgot text-muted" href={{ route('login') }}>Already have an account?</a>

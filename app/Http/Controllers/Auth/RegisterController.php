@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Stevebauman\Location\Facades\Location;
 
 class RegisterController extends Controller
 {
@@ -64,6 +65,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //once i upload to aws check if it works
+        $ip = $_SERVER["REMOTE_ADDR"];
+        echo $ip;
+        $locData = \Location::get('85.192.82.205');
         return User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
@@ -72,6 +77,7 @@ class RegisterController extends Controller
             'bio' => null,
             'gender' => $data['gender'],
             'interested_in' => null,
+            'location' => $locData->cityName,
             'age' => $data['age']
         ]);
     }
