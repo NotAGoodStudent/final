@@ -2,13 +2,13 @@
 <link href="{{ asset('css/updateprofileStyle.css') }}" rel="stylesheet">
 @section('content')
     <div class="update_data">
-        <form action="" id="form" class="m-auto" style="margin: 0; width: 500px">
+        <form action="{{route('updateUserData')}}" id="form" class="m-auto" style="margin: 0; width: 500px">
             <div class="imgs_div d-flex justify-content-around">
-                <img class="imgs" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                <img class="imgs" id="photo1_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
                 <input type="file" id="photo1" hidden>
-                <img class="imgs" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                <img class="imgs" id="photo2_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
                 <input type="file" id="photo2" hidden>
-                <img class="imgs" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                <img class="imgs" id="photo3_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
                 <input type="file" id="photo3" hidden>
             </div>
             <div class="sensitive_data m-auto">
@@ -26,12 +26,44 @@
                     <textarea id="bio" name="bio" class="txt-area mx-auto d-block">{{auth()->user()->bio}}</textarea>
                 @endif
                 <label for="interested_in">Interested in</label>
-                <select name="interested_in" id="interested_in" class="interested_in" id="interested_in">
-                    <option value="Male">Men</option>
-                    <option value="Female">Women</option>
-                    <option value="Both">Men & Womem</option>
-                    <option value="Other">Other</option>
-                </select>
+                @if(auth()->user()->interested_in == null)
+                    <select name="interested_in" id="interested_in" class="interested_in" id="interested_in">
+                        <option value="Male">Men</option>
+                        <option value="Female">Women</option>
+                        <option value="Both">Men & Womem</option>
+                        <option value="Other">Other</option>
+                    </select>
+                @else
+                    @if(auth()->user()->interested_in == 'Male')
+                    <select name="interested_in" id="interested_in" class="interested_in" id="interested_in">
+                        <option value="Male">Men</option>
+                        <option value="Female">Women</option>
+                        <option value="Both">Men & Womem</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    @elseif(auth()->user()->interested_in == 'Female')
+                        <select name="interested_in" id="interested_in" class="interested_in" id="interested_in">
+                            <option value="Female">Women</option>
+                            <option value="Male">Men</option>
+                            <option value="Both">Men & Womem</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        @elseif(auth()->user()->interested_in == 'Both')
+                        <select name="interested_in" id="interested_in" class="interested_in" id="interested_in">
+                            <option value="Both">Men & Womem</option>
+                            <option value="Female">Women</option>
+                            <option value="Male">Men</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    @elseif(auth()->user()->interested_in == 'Other')
+                        <select name="interested_in" id="interested_in" class="interested_in" id="interested_in">
+                            <option value="Other">Other</option>
+                            <option value="Both">Men & Womem</option>
+                            <option value="Female">Women</option>
+                            <option value="Male">Men</option>
+                        </select>
+                    @endif
+                @endif
                 <label for="age">Age</label>
                 <input type="number" id="age" name="age" value="{{auth()->user()->age}}">
                 <input type="submit" class="buttonSub" value="Update">
@@ -40,6 +72,22 @@
     </div>
     <script>
         $(document).ready(function () {
+
+
+            $('#photo1_space').click(function (){
+                $('#photo1').click();
+            });
+
+            $('#photo2_space').click(function (){
+                $('#photo2').click();
+            });
+
+            $('#photo3_space').click(function (){
+                $('#photo3').click();
+            });
+
+
+
 
             $('#form').validate({
                 rules: {

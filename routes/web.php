@@ -23,5 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function() {
     Route::get('/user/updateProfile', 'UserController@returnUpdateProfile')->name('updateProfile');
+    Route::get('/user/updateProfileData', 'UserController@updateUserData')->name('updateUserData');
 });
 

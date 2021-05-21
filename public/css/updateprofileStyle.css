@@ -35,6 +35,11 @@ textarea {
     width: 100px;
 }
 
+.imgs:hover{
+    cursor: pointer;
+
+}
+
 .sensitive_data{
     margin-top: 25px;
     width: 100%;

@@ -22,8 +22,10 @@
                         @endif
                     @if(!$is_liked && !$is_matched)
                             <div class="card">
-                                <div class="d-inline-block">
-
+                                <img src="" alt="">
+                                <div class="card_footer">
+                                    <h5><strong>{{$u->name}},</strong> {{$u->age}}</h5>
+                                    <p>{{$u->bio}}</p>
                                 </div>
                             </div>
                         @endif

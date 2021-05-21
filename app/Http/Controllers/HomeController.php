@@ -24,13 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->interedted_in == 'Both'){
-            $users = User::where('interested_in', '=', auth()->user()->gender || 'Both')->where('id', '!=', auth()->user()->id)->exists();
-        }
-        else{
-            $users = User::where('interested_in', '=', auth()->user()->gender)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->exists();
-        }
+        if(auth()->user()->interedted_in != null) {
 
-        return view('users.home', compact('users'));
+            if (auth()->user()->interedted_in == 'Both') {
+                $users = User::where('interested_in', '=', auth()->user()->gender || 'Both')->where('id', '!=', auth()->user()->id)->exists();
+            } else {
+                $users = User::where('interested_in', '=', auth()->user()->gender)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->exists();
+            }
+            return view('users.home', compact('users'));
+        }
+        return view('users.home');
     }
 }
