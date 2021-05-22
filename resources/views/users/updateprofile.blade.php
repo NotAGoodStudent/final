@@ -2,15 +2,69 @@
 <link href="{{ asset('css/updateprofileStyle.css') }}" rel="stylesheet">
 @section('content')
     <div class="update_data">
-        <form action="{{route('updateUserData')}}" id="form" class="m-auto" style="margin: 0; width: 500px">
-            <div class="imgs_div d-flex justify-content-around">
-                <img class="imgs" id="photo1_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
-                <input type="file" id="photo1" hidden>
-                <img class="imgs" id="photo2_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
-                <input type="file" id="photo2" hidden>
-                <img class="imgs" id="photo3_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
-                <input type="file" id="photo3" hidden>
-            </div>
+        <form action="{{route('updateUserData')}}" method="post" enctype="multipart/form-data" id="form" class="m-auto" style="margin: 0; width: 500px">
+            @csrf
+            @method('PATCH')
+            @if($pictures != null)
+                @php
+                    $photo1_found = false;
+                    $photo2_found = false;
+                    $photo3_found = false;
+                @endphp
+                @if(count($pictures) > 0)
+                     <div class="imgs_div d-flex justify-content-around">
+                        @foreach($pictures as $p)
+                            @if(strpos($p->picture_path, 'photo1'))
+                                 @php
+                                     $photo1_found = true;
+                                 @endphp
+                                <img class="imgs_set" id="photo1_space" title="Add a photo!" src="{{Storage::url($p->picture_path)}}" alt="">
+                                <input type="file" id="photo1" name="photo1" hidden>
+                             @elseif(strpos($p->picture_path, 'photo2'))
+                                 <img class="imgs_set" id="photo2_space" title="Add a photo!" src="{{Storage::url($p->picture_path)}}" alt="">
+                                 <input type="file" id="photo2" name="photo2" hidden>
+                                 @php
+                                     $photo2_found = true;
+                                 @endphp
+                             @elseif(strpos($p->picture_path, 'photo3'))
+                                 <img class="imgs_set" id="photo3_space" title="Add a photo!" src="{{Storage::url($p->picture_path)}}" alt="">
+                                 <input type="file" id="photo3" name="photo3" hidden>
+                                 @php
+                                     $photo3_found = true;
+                                 @endphp
+                             @endif
+                        @endforeach
+                        @if(!$photo1_found)
+                                <img class="imgs" id="photo1_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                                <input type="file" id="photo1" name="photo1" hidden>
+                            @endif
+                        @if(!$photo2_found)
+                                <img class="imgs" id="photo2_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                                <input type="file" id="photo2" name="photo2" hidden>
+                            @endif
+                        @if(!$photo3_found)
+                                <img class="imgs" id="photo3_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                                <input type="file" id="photo3" name="photo3" hidden>
+                            @endif
+
+                    </div>
+                @else
+                    <div class="imgs_div d-flex justify-content-around">
+                        <img class="imgs" id="photo1_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                        <input type="file" id="photo1" name="photo1" hidden>
+                        <img class="imgs" id="photo2_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                        <input type="file" id="photo2" name="photo2" hidden>
+                        <img class="imgs" id="photo3_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                        <input type="file" id="photo3" name="photo3" hidden>
+                    </div>     <div class="imgs_div d-flex justify-content-around">
+                        <img class="imgs" id="photo1_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                        <input type="file" id="photo1" name="photo1" hidden>
+                        <img class="imgs" id="photo2_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                        <input type="file" id="photo2" name="photo2" hidden>
+                        <img class="imgs" id="photo3_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
+                        <input type="file" id="photo3" name="photo3" hidden>
+                    </div>
+                @endif
             <div class="sensitive_data m-auto">
                 <label for="name">Name </label>
                 <input type="text" name="name" id="name" value="{{auth()->user()->name}}">

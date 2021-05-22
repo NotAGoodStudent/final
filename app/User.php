@@ -9,15 +9,26 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-    public function likes()
+    public function given_likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(Like::class, 'like_giver');
     }
 
-    public function matches()
+    public function received_likes()
     {
-        return $this->hasMany(Match::class);
+        return $this->hasMany(Like::class, 'like_receiver');
     }
+
+    public function given_match()
+    {
+        return $this->hasMany(Match::class, 'matcher');
+    }
+
+    public function received_match()
+    {
+        return $this->hasMany(Match::class,'matched');
+    }
+
 
     public function pictures()
     {

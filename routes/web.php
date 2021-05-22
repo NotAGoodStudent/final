@@ -19,10 +19,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function() {
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/user/updateProfile', 'UserController@returnUpdateProfile')->name('updateProfile');
-    Route::get('/user/updateProfileData', 'UserController@updateUserData')->name('updateUserData');
+    Route::patch('/user/updateProfileData', 'UserController@updateUserData')->name('updateUserData');
 });
 

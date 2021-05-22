@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Match extends Model
 {
-    public function user()
+    public function match()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

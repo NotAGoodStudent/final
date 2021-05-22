@@ -8,6 +8,8 @@ use App\Picture;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
@@ -32,7 +34,8 @@ class UserController extends Controller
         };
     }
     function returnUpdateProfile(){
-        return view('users.updateprofile');
+        $pictures = Picture::where('user_id', '=', auth()->user()->id)->get();
+        return view('users.updateprofile', compact('pictures'));
     }
 
     function updateUserData(Request $request){
@@ -43,30 +46,37 @@ class UserController extends Controller
             return redirect()->route('modifyProfile')->with('message', 'The desired email is already taken!');
         }
         else{
+            echo 'here';
+            echo is_null($request->file('photo1') );
             if($request->file('photo1') != null){
                 //add photo
 
+                echo 'is not null';
                 $picture = new Picture();
-                if($this.$this->isImage($request->file('photo1'))){
+                $extension = $request->file('photo1')->extension();
+                if($this->isImage($request->file('photo1')))
+                {
 
-                    $pictures = Picture::where('user_id', '=', auth()->user()->id);
-                    if(count($pictures) == 3){
+                    echo 'is image  ';
+                    $pictures = Picture::where('user_id', '=', auth()->user()->id)->get();
+                    if(count($pictures) >= 1){
                         foreach ($pictures as $p){
-                            if($p->picture_path == 'public/imgs/pfp/'. auth()->user()->name."photo1"){
-                                    Storage::delete($p->picture_path);
-                                    break;
+                            if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo1.".$extension){
+                                Picture::where('picture_path', '=', '/imgs/pfp/'.auth()->user()->id."/photo1.".$extension)->delete();
+                                Storage::delete($p->picture_path);
+                                break;
                             }
                         }
-                        $request->input('photo1')->move('public/imgs/pfp', 'photo1');
+                        $request->file('photo1')->storeAs('public/imgs/pfp/'. auth()->user()->id, 'photo1'.'.'.$extension);
                         $picture->user_id = auth()->user()->id;
-                        $picture->picture_path = 'public/imgs/pfp/photo1';
+                        $picture->picture_path = '/imgs/pfp/'.auth()->user()->id.'/photo1.'.$extension;
                         $picture->save();
-
                     }
                     else{
-                        $request->input('photo1')->move('public/imgs/pfp', 'photo1');
+                        echo 'here';
+                        $request->file('photo1')->storeAs('public/imgs/pfp/'. auth()->user()->id, 'photo1'.'.'.$extension);
                         $picture->user_id = auth()->user()->id;
-                        $picture->picture_path = 'public/imgs/pfp/photo1';
+                        $picture->picture_path = '/imgs/pfp/'.auth()->user()->id.'/photo1.'.$extension;
                         $picture->save();
                     }
 
@@ -77,14 +87,75 @@ class UserController extends Controller
 
             if($request->file('photo2') != null){
                 //add photo
-                if($this.$this->isImage($request->file('photo2'))){
+
+                echo 'is not null';
+                $picture = new Picture();
+                $extension = $request->file('photo2')->extension();
+                if($this->isImage($request->file('photo2')))
+                {
+
+                    echo 'is image  ';
+                    $pictures = Picture::where('user_id', '=', auth()->user()->id)->get();
+                    if(count($pictures) >= 1){
+                        foreach ($pictures as $p){
+                            if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo2.".$extension){
+                                Picture::where('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo2.'.$extension)->delete();
+                                Storage::delete($p->picture_path);
+                                break;
+                            }
+                        }
+                        $request->file('photo2')->storeAs('public/imgs/pfp/'. auth()->user()->id, 'photo2'.'.'.$extension);
+                        $picture->user_id = auth()->user()->id;
+                        $picture->picture_path = '/imgs/pfp/'.auth()->user()->id.'/photo2.'.$extension;
+                        $picture->save();
+                    }
+                    else{
+                        echo 'here';
+                        $request->file('photo2')->storeAs('public/imgs/pfp/'. auth()->user()->id, 'photo2'.'.'.$extension);
+                        $picture->user_id = auth()->user()->id;
+                        $picture->picture_path = '/imgs/pfp/'.auth()->user()->id.'/photo2.'.$extension;
+                        $picture->save();
+                    }
+
+
 
                 }
             }
 
             if($request->file('photo3') != null){
                 //add photo
-                if($this.$this->isImage($request->file('photo3'))){
+
+                echo 'is not null';
+                $picture = new Picture();
+                $extension = $request->file('photo3')->extension();
+                if($this->isImage($request->file('photo3')))
+                {
+
+                    echo 'is image  ';
+                    $pictures = Picture::where('user_id', '=', auth()->user()->id)->get();
+                    if(count($pictures) >= 1){
+                        foreach ($pictures as $p){
+                            if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo3.".$extension){
+                                Picture::where('picture_path', '=', '/imgs/pfp/'. auth()->user()->id."/photo3.".$extension)->delete();
+                                Storage::delete($p->picture_path);
+                                break;
+                            }
+                        }
+                        $request->file('photo3')->storeAs('public/imgs/pfp/'. auth()->user()->id, 'photo3'.'.'.$extension);
+                        $picture->user_id = auth()->user()->id;
+                        $picture->picture_path = '/imgs/pfp/'.auth()->user()->id.'/photo3.'.$extension;
+                        $picture->save();
+                    }
+                    else{
+                        echo 'here';
+                        $extension = $request->file('photo3')->extension();
+                        $request->file('photo3')->storeAs('public/imgs/pfp/'. auth()->user()->id, 'photo3'.'.'.$extension);
+                        $picture->user_id = auth()->user()->id;
+                        $picture->picture_path = '/imgs/pfp/'.auth()->user()->id.'/photo3.'.$extension;
+                        $picture->save();
+                    }
+
+
 
                 }
             }

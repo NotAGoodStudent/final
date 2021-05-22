@@ -16,7 +16,6 @@ textarea {
     transition: 0.25s;
     margin: 5px 0 22px 0;
     overflow: hidden;
-    font-size: 20px;
     box-shadow: 0 0 10px rgba(0,0,0, 0.4);
 }
 
@@ -93,6 +92,18 @@ textarea {
     border: none;
     background: #f1f1f1;
     box-shadow: 0 0 10px rgba(0,0,0, 0.4);
+}
+
+.imgs_set{
+    height: 100px;
+    width: 100px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.5);
+    border: none;
+    border-radius: 25px;
+}
+
+.imgs_set:hover{
+    cursor: pointer;
 }
 .error
 {

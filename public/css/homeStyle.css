@@ -1,0 +1,46 @@
+body{
+    background-color: rgba(245,247,250,255);
+}
+
+.partners{
+
+}
+
+.cardd{
+    width: 400px;
+    padding: 40px;
+}
+
+.cardd > img{
+    height: 600px;
+    width: 400px;
+    position: absolute;
+    border-radius: 25px;
+        box-shadow: 0 0 10px rgba(0,0,0, 0.8);
+
+}
+
+
+.cardd_footer{
+    z-index: 100;
+    position: absolute;
+    color: white;
+    top: 620px;
+    padding-left: 20px;
+}
+.icons{
+    z-index: 100;
+    position: absolute;
+    color: white;
+    top: 750px;
+    padding-left: 20px;
+    font-size: 50px;
+    width: 400px;
+}
+
+.icons > a > i{
+    background-color: #fff;
+    border-radius: 50%;
+    font-size: 50px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.1);
+}
