@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use MongoDB\Driver\Session;
 use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
@@ -43,7 +44,8 @@ class UserController extends Controller
         $user = User::findOrFail(auth()->user()->id);
         if(User::where('email', '=', $request->input('email'))->where('id', '!=', auth()->user()->id)->exists())
         {
-            return redirect()->route('modifyProfile')->with('message', 'The desired email is already taken!');
+            $request->session()->flash('alert-danger', 'The desired email is already in use!');
+            return redirect()->route('updateProfile');
         }
         else{
             echo 'here';
@@ -169,7 +171,8 @@ class UserController extends Controller
             $user->interested_in = $request->input('interested_in');
             $user->age = $request->input('age');
             $user->save();
-            return redirect()->route('updateProfile')->with('message', 'Data updated successfully!');
+            $request->session()->flash('alert-success', 'Data was successfully updated!');
+            return redirect()->route('updateProfile');
         }
     }
 }

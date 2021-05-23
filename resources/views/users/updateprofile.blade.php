@@ -2,6 +2,24 @@
 <link href="{{ asset('css/updateprofileStyle.css') }}" rel="stylesheet">
 @section('content')
     <div class="update_data">
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+
+                    <p class="alert alert-{{ $msg }} m-auto"  id="message" style="display: none; width: 500px; text-align: center; position: absolute">{{ Session::get('alert-' . $msg) }}</p>
+                    <script>
+                        $(function(){
+                            $("#message").show('slow');
+                        });
+                        $(function(){
+                            setTimeout(function() {
+                                $("#message").hide('slow');
+                            }, 3000);
+                        });
+                    </script>
+                @endif
+            @endforeach
+        </div>
         <form action="{{route('updateUserData')}}" method="post" enctype="multipart/form-data" id="form" class="m-auto" style="margin: 0; width: 500px">
             @csrf
             @method('PATCH')
@@ -20,20 +38,26 @@
                                  @endphp
                                 <img class="imgs_set" id="photo1_space" title="Add a photo!" src="{{Storage::url($p->picture_path)}}" alt="">
                                 <input type="file" id="photo1" name="photo1" hidden>
-                             @elseif(strpos($p->picture_path, 'photo2'))
-                                 <img class="imgs_set" id="photo2_space" title="Add a photo!" src="{{Storage::url($p->picture_path)}}" alt="">
-                                 <input type="file" id="photo2" name="photo2" hidden>
-                                 @php
-                                     $photo2_found = true;
-                                 @endphp
-                             @elseif(strpos($p->picture_path, 'photo3'))
-                                 <img class="imgs_set" id="photo3_space" title="Add a photo!" src="{{Storage::url($p->picture_path)}}" alt="">
-                                 <input type="file" id="photo3" name="photo3" hidden>
-                                 @php
-                                     $photo3_found = true;
-                                 @endphp
                              @endif
                         @endforeach
+                         @foreach($pictures as $p)
+                                @if(strpos($p->picture_path, 'photo2'))
+                                    <img class="imgs_set" id="photo2_space" title="Add a photo!" src="{{Storage::url($p->picture_path)}}" alt="">
+                                    <input type="file" id="photo2" name="photo2" hidden>
+                                    @php
+                                        $photo2_found = true;
+                                    @endphp
+                                @endif
+                            @endforeach
+                            @foreach($pictures as $p)
+                                @if(strpos($p->picture_path, 'photo3'))
+                                    <img class="imgs_set" id="photo3_space" title="Add a photo!" src="{{Storage::url($p->picture_path)}}" alt="">
+                                    <input type="file" id="photo3" name="photo3" hidden>
+                                    @php
+                                        $photo3_found = true;
+                                    @endphp
+                                @endif
+                            @endforeach
                         @if(!$photo1_found)
                                 <img class="imgs" id="photo1_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
                                 <input type="file" id="photo1" name="photo1" hidden>
@@ -65,6 +89,7 @@
                         <input type="file" id="photo3" name="photo3" hidden>
                     </div>
                 @endif
+            @endif
             <div class="sensitive_data m-auto">
                 <label for="name">Name </label>
                 <input type="text" name="name" id="name" value="{{auth()->user()->name}}">
