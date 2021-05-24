@@ -73,14 +73,8 @@
 
                     </div>
                 @else
+
                     <div class="imgs_div d-flex justify-content-around">
-                        <img class="imgs" id="photo1_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
-                        <input type="file" id="photo1" name="photo1" hidden>
-                        <img class="imgs" id="photo2_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
-                        <input type="file" id="photo2" name="photo2" hidden>
-                        <img class="imgs" id="photo3_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
-                        <input type="file" id="photo3" name="photo3" hidden>
-                    </div>     <div class="imgs_div d-flex justify-content-around">
                         <img class="imgs" id="photo1_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">
                         <input type="file" id="photo1" name="photo1" hidden>
                         <img class="imgs" id="photo2_space" title="Add a photo!" src="{{Storage::url('/imgs/front/addImgDefault.png')}}" alt="">

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
+use App\Match;
+use App\Picture;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -26,14 +29,23 @@ class HomeController extends Controller
     {
         if(auth()->user()->interested_in != null)
         {
+            $pictures = Picture::all();
+            $likes = Like::all();
+            $matches =Match::all();
 
             if (auth()->user()->interested_in == 'Both') {
-                $users = User::where('interested_in', '=', auth()->user()->gender || 'Both')->where('id', '!=', auth()->user()->id)->get();
+                $users = User::where('gender', '=', 'Male')->orWhere('gender', '=', 'Female')->where('interested_in', '=', 'Both')->orWhere('interested_in', '=', auth()->user()->gender)->where('gender', '!=', 'Other')->where('id', '!=', auth()->user()->id)->get();
             }
-            else {
-                $users = User::where('interested_in', '=', auth()->user()->gender)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
+            elseif(auth()->user()->interested_in == 'Other') {
+                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
             }
-            return view('users.home', compact('users'));
+            elseif(auth()->user()->interested_in == 'Male') {
+                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
+            }
+            else{
+                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
+            }
+            return view('users.home', compact('users', 'pictures', 'likes', 'matches'));
         }
         return view('users.home');
     }

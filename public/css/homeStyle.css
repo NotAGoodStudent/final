@@ -9,12 +9,14 @@ body{
 .cardd{
     width: 400px;
     padding: 40px;
+    display: none;
 }
 
 .cardd > img{
     height: 600px;
     width: 400px;
     position: absolute;
+    border: none;
     border-radius: 25px;
         box-shadow: 0 0 10px rgba(0,0,0, 0.8);
 
@@ -22,11 +24,13 @@ body{
 
 
 .cardd_footer{
+    width: 400px;
     z-index: 100;
     position: absolute;
     color: white;
     top: 620px;
     padding-left: 20px;
+    word-break: break-word;
 }
 .icons{
     z-index: 100;
@@ -43,4 +47,8 @@ body{
     border-radius: 50%;
     font-size: 50px;
     box-shadow: 0 0 10px rgba(0,0,0, 0.1);
+}
+
+.icons > a > i:hover{
+    cursor: pointer;
 }

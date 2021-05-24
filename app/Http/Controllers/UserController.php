@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
+use App\Match;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Picture;
@@ -173,6 +175,52 @@ class UserController extends Controller
             $user->save();
             $request->session()->flash('alert-success', 'Data was successfully updated!');
             return redirect()->route('updateProfile');
+        }
+    }
+
+    function likeUser($id)
+    {
+        $likes_for_user = Like::where('like_receiver', '=', auth()->user()->id)->get();
+        if(count($likes_for_user) > 0){
+            foreach ($likes_for_user as $l){
+                if($l->like_giver == $id){
+                    $match = new Match();
+                    $match->matcher = auth()->user()->id;
+                    $match->matched = $id;
+                    $match->save();
+                    Like::where('like_receiver', '=', auth()->user()->id)->delete();
+                    return "match happened";
+                }
+            }
+
+        }
+
+        $like = new Like();
+        $like->like_giver = auth()->user()->id;
+        $like->like_receiver = $id;
+        $like->save();
+    }
+
+    function getHomeData(){
+        if(auth()->user()->interested_in != null)
+        {
+            $pictures = Picture::all();
+            $likes = Like::all();
+            $matches =Match::all();
+
+            if (auth()->user()->interested_in == 'Both') {
+                $users = User::where('gender', '=', 'Male')->orWhere('gender', '=', 'Female')->where('interested_in', '=', 'Both')->orWhere('interested_in', '=', auth()->user()->gender)->where('gender', '!=', 'Other')->where('id', '!=', auth()->user()->id)->get();
+            }
+            elseif(auth()->user()->interested_in == 'Other') {
+                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
+            }
+            elseif(auth()->user()->interested_in == 'Male') {
+                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
+            }
+            else{
+                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
+            }
+            return compact('users', 'pictures', 'likes', 'matches');
         }
     }
 }
