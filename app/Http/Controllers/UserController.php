@@ -65,7 +65,7 @@ class UserController extends Controller
                     $pictures = Picture::where('user_id', '=', auth()->user()->id)->get();
                     if(count($pictures) >= 1){
                         foreach ($pictures as $p){
-                            if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo1.".$extension){
+                            if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo1.".'png' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo1.".'jpg' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo1.".'jpeg'){
                                 Picture::where('picture_path', '=', '/imgs/pfp/'.auth()->user()->id."/photo1.".$extension)->delete();
                                 Storage::delete($p->picture_path);
                                 break;
@@ -102,7 +102,7 @@ class UserController extends Controller
                     $pictures = Picture::where('user_id', '=', auth()->user()->id)->get();
                     if(count($pictures) >= 1){
                         foreach ($pictures as $p){
-                            if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo2.".$extension){
+                            if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo2.".'png' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo2.".'jpg' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo2.".'jpeg'){
                                 Picture::where('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo2.'.$extension)->delete();
                                 Storage::delete($p->picture_path);
                                 break;
@@ -139,7 +139,7 @@ class UserController extends Controller
                     $pictures = Picture::where('user_id', '=', auth()->user()->id)->get();
                     if(count($pictures) >= 1){
                         foreach ($pictures as $p){
-                            if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo3.".$extension){
+                            if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo3.".'png' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo3.".'jpg' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo3.".'jpeg'){
                                 Picture::where('picture_path', '=', '/imgs/pfp/'. auth()->user()->id."/photo3.".$extension)->delete();
                                 Storage::delete($p->picture_path);
                                 break;
@@ -209,16 +209,16 @@ class UserController extends Controller
             $matches =Match::all();
 
             if (auth()->user()->interested_in == 'Both') {
-                $users = User::where('gender', '=', 'Male')->orWhere('gender', '=', 'Female')->where('interested_in', '=', 'Both')->orWhere('interested_in', '=', auth()->user()->gender)->where('gender', '!=', 'Other')->where('id', '!=', auth()->user()->id)->get();
+                $users = User::where('gender', '=', 'Male')->orWhere('gender', '=', 'Female')->where('interested_in', '=', 'Both')->orWhere('interested_in', '=', auth()->user()->gender)->where('gender', '!=', 'Other')->where('id', '!=', auth()->user()->id)->where('location', '=', auth()->user()->location)->get();
             }
             elseif(auth()->user()->interested_in == 'Other') {
                 $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
             }
             elseif(auth()->user()->interested_in == 'Male') {
-                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
+                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->where('location', '=', auth()->user()->location)->get();
             }
             else{
-                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->get();
+                $users = User::where('interested_in', '=', auth()->user()->interested_in)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->where('location', '=', auth()->user()->location)->get();
             }
             return compact('users', 'pictures', 'likes', 'matches');
         }

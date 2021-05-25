@@ -104,7 +104,6 @@
                         <option value="Male">Men</option>
                         <option value="Female">Women</option>
                         <option value="Both">Men & Womem</option>
-                        <option value="Other">Other</option>
                     </select>
                 @else
                     @if(auth()->user()->interested_in == 'Male')
