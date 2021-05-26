@@ -3,12 +3,12 @@
 @section('content')
     <link href="{{ asset('css/likesStyle.css') }}" rel="stylesheet">
     @if(count($likes) > 0)
-        <div class="partners m-auto mt-5 d-flex justify-content-around" id="partners">
+        <div class="partners m-auto mt-5 d-flex justify-content-center" id="partners">
         </div>
     @else
         <div class="center">
-            <h5 style="text-align: center">Well...</h5>
-            <p style="text-align: center">Seems like you've got no likes yet</p>
+            <h1 style="text-align: center">Well...</h1>
+            <h5 style="text-align: center">Seems like you've got no likes yet</h5>
             <img style="text-align: center" class="mt-5" src="{{Storage::url('imgs/front/brheart.png')}}" alt="">
         </div>
     @endif
@@ -18,7 +18,7 @@
             //url: 'http://ec2-3-236-81-152.compute-1.amazonaws.com:3300/topics/getTopics',
             url: 'http://localhost:3300/likes/getLikesData',
             success: function (data) {
-                users = data['users'];
+                users = data['users_clear'];
                 pictures = data['pictures'];
                 for(let x = 0; x < users.length;x++){
                     for(let i = 0; i < pictures.length;i++){
@@ -29,9 +29,9 @@
                     }
                 }
 
-
-
-
+                $('.cardd').each(function (x, card){
+                        $(this).slideUp( 'slow' ).delay( 'slow' ).fadeIn( 'slow' );
+                });
             },
             error: function (d){
                 console.log(d);

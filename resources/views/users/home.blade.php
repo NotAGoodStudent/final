@@ -3,8 +3,11 @@
 @section('content')
     <link href="{{ asset('css/homeStyle.css') }}" rel="stylesheet">
 @if(auth()->user()->interested_in == null)
-    <h5 style="text-align: center">Hi {{auth()->user()->name}}</h5>
-    <p style="text-align: center">Please let us know more about <span><a href="{{route('updateProfile')}}" style="">you</a></span> before you get started</p>
+    <div class="center">
+        <h1 style="text-align: center">Hi {{auth()->user()->name}}!</h1>
+        <h5 style="text-align: center">Please let us know more about <span><a href="{{route('updateProfile')}}" style="">you</a></span> before you get started</h5>
+        <img style="text-align: center" class="mt-5" src="{{Storage::url('imgs/front/orangeheart.png')}}" alt="">
+    </div>
 @else
 
     <div class="partners m-auto mt-5 justify-center" id="partners">

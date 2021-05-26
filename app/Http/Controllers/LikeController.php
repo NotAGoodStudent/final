@@ -19,16 +19,18 @@ class LikeController extends Controller
         $pictures = Picture::all();
         $likes = Like::where('like_receiver', '=', auth()->user()->id)->get();
         $users = User::all();
+        $users_clear = [];
         if(count($likes)> 0) {
 
-            foreach ($users as $u) {
-                foreach ($likes as $l) {
-                    if ($l->like_giver != $u->id) unset($u);
+            foreach ($likes as $l) {
+                foreach ($users as $u) {
+                    if ($l->like_giver == $u->id){
+                        array_push($users_clear, $u);
+                    }
                 }
             }
         }
-
-        return compact('users', 'pictures', 'likes');
+        return compact('users_clear', 'pictures', 'likes');
 
     }
 }

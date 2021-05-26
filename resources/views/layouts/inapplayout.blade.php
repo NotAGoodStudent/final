@@ -28,37 +28,183 @@
 </head>
 <body>
 <div id="app">
-    <div class="s-layout">
-        <!-- Sidebar -->
-        <div class="s-layout__sidebar">
-            <a class="s-sidebar__trigger" href="#0">
-                <i class="fa fa-bars"></i>
-            </a>
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="container-fluid">
+            <img class="logo" src="{{Storage::url('imgs/front/logo.png')}}" style="height: 50px" alt="">
+            <!-- Windows-->
+            <a class="navbar-brand" href="{{route('home')}}" style="margin-left: 10px">DashCube</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <nav class="s-sidebar__nav">
-                <ul>
-                    <li>
-                        <a class="s-sidebar__nav-link" href="#0">
-                            <i class="fa fa-home"></i><em>Home</em>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="s-sidebar__nav-link" href="#0">
-                            <i class="fa fa-user"></i><em>My Profile</em>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="s-sidebar__nav-link" href="#0">
-                            <i class="fa fa-camera"></i><em>Camera</em>
-                        </a>
-                    </li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+                    @if(auth()->check())
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" href="{{ route('likes') }}">Likes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" href="{{ route('login') }}">Messages</a>
+                        </li>
+                    @endif
+
                 </ul>
-            </nav>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="{{route('updateProfile')}}">
+                                        <span class="icon">
+                                        <i class="fas fa-user-circle" style="color:orange;font-weight: bold; margin-right: 3px"></i>
+                                        </span>Edit profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <span class="icon">
+                                        <i class="fas fa-sign-out-alt text-danger" style="font-weight: bold; margin-right: 3px"></i>
+                                        </span>{{ __('Logout') }}</a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
         </div>
-    </div>
-    <main class="py-4">
+    </nav>
+
+    <main style=" min-height: 100%">
         @yield('content')
     </main>
 </div>
+<div class="" style="
+  clear: both;
+    position: relative;
+    margin-top: -100px;">
+        <section class="contact-area" id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="contact-content text-center">
+
+                            <div class="contact-social">
+                                <ul>
+                                    <li><a class="hover-target" href=""><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a class="hover-target" href=""><i class="fab fa-linkedin-in"></i></a></li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <p><strong>Copyright &copy; 2021</strong> <img src="{{Storage::url('imgs/front/logo.png')}}" alt="logo"> <strong>DashCube</strong> All Rights Reserved.</p>
+        </footer>
+    </div>
+
 </body>
+<style>
+
+    section {
+        padding: 60px 0;
+        /* min-height: 100vh;*/
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .contact-area {
+        border-bottom: 1px solid #353C46;
+    }
+
+    .contact-content p {
+        font-size: 15px;
+        margin: 30px 0 60px;
+        position: relative;
+    }
+
+    .contact-content p::after {
+        background: white   ;
+        bottom: -30px;
+        content: "";
+        height: 1px;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%);
+        width: 80%;
+    }
+
+    .contact-content h6 {
+        color: #8b9199;
+        font-size: 15px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    .contact-content span {
+        color: #353c47;
+        margin: 0 10px;
+    }
+
+    .contact-social {
+        margin-top: 30px;
+    }
+
+    .contact-social > ul {
+        display: inline-flex;
+    }
+
+    .contact-social ul li a {
+        border: 1px solid black;
+        color: black;
+        display: inline-block;
+        height: 40px;
+        margin: 0 10px;
+        padding-top: 7px;
+        transition: all 0.4s ease 0s;
+        width: 40px;
+    }
+
+    .contact-social ul li a:hover {
+        border: 1px solid #FAB702;
+        color: #FAB702;
+    }
+
+    .contact-content img {
+        max-width: 210px;
+    }
+
+    section, footer {
+        background: white;
+        color: black;
+    }
+
+    footer p {
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    footer img {
+        width: 44px;
+    }
+</style>
 </html>
