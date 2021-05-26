@@ -40,6 +40,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @if(auth()->check())
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: black" href="{{ route('likes') }}">Likes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: black" href="{{ route('login') }}">Messages</a>
+                            </li>
+                        @endif
 
                     </ul>
 
@@ -48,18 +56,18 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="dropdown" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="dropdown" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item">
                                 <a class="dropdown-item" href="{{route('updateProfile')}}">
                                         <span class="icon">
-                                        <i class="fas fa-user-circle" style="color:#2ecc71;font-weight: bold; margin-right: 3px"></i>
+                                        <i class="fas fa-user-circle" style="color:orange;font-weight: bold; margin-right: 3px"></i>
                                         </span>Edit profile</a>
                             </li>
                             <li class="nav-item">
