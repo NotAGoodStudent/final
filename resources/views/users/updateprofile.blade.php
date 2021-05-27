@@ -111,7 +111,6 @@
                         <option value="Male">Men</option>
                         <option value="Female">Women</option>
                         <option value="Both">Men & Womem</option>
-                        <option value="Other">Other</option>
                     </select>
                     @elseif(auth()->user()->interested_in == 'Female')
                         <select name="interested_in" id="interested_in" class="interested_in" id="interested_in">

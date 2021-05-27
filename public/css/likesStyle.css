@@ -27,6 +27,7 @@ body{
     border: none;
     border-radius: 25px;
     box-shadow: 0 0 10px rgba(0,0,0, 0.8);
+    transition: 0.25s;
 
 }
 .cardd_footer{
@@ -42,5 +43,58 @@ body{
 
 
 .cardd > img:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.pickedCard{
+    display: none;
+}
+
+.cardd_sel{
+    width: 400px;
+    padding: 40px;
+    display: none;
+}
+
+.cardd_sel > img{
+    height: 600px;
+    width: 400px;
+    object-fit: cover;
+    position: absolute;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.8);
+
+}
+.cardd_sel_footer{
+    width: 400px;
+    z-index: 100;
+    position: absolute;
+    color: white;
+    top: 580px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    word-break: break-word;
+    border-radius: 25px;
+}
+.icons{
+    z-index: 100;
+    position: absolute;
+    color: white;
+    top: 750px;
+    padding-left: 15px;
+    font-size: 50px;
+    width: 400px;
+}
+
+.icons > a > i{
+    background-color: #fff;
+    border-radius: 50%;
+    font-size: 50px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.1);
+}
+
+.icons > a > i:hover{
     cursor: pointer;
 }

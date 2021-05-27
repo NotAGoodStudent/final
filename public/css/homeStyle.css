@@ -16,7 +16,6 @@ body{
 .cardd{
     width: 400px;
     padding: 40px;
-    display: none;
 }
 
 .cardd > img{

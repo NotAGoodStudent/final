@@ -98,7 +98,7 @@
                 //url: 'http://ec2-3-236-81-152.compute-1.amazonaws.com:3300/topics/getTopics',
                 url: 'http://localhost:3300/user/likeUser/'+id,
                 success: function (data) {
-                    $('#cardd'+id).hide('slow');
+                    $('#cardd'+id).hide('fast');
                     let added = false;
                     likedUsers.push(id);
                         for (let x = 0; x < users.length;x++){
@@ -149,7 +149,7 @@
         }
 
         function denyUser(id) {
-            $('#cardd'+id).hide('slow');
+            $('#cardd'+id).hide('fast');
             likedUsers.push(id);
             var added = false;
             for (let x = 0; x < users.length;x++){

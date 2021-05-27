@@ -40,7 +40,7 @@ class UserController extends Controller
         $pictures = Picture::where('user_id', '=', auth()->user()->id)->get();
         return view('users.updateprofile', compact('pictures'));
     }
-    
+
 
     function updateUserData(Request $request){
 
@@ -200,6 +200,10 @@ class UserController extends Controller
         $like->like_giver = auth()->user()->id;
         $like->like_receiver = $id;
         $like->save();
+    }
+
+    function removelikeUser($id){
+        Like::where('like_giver', '=', $id)->where('like_receiver', '=', auth()->user()->id)->delete();
     }
 
     function getHomeData(){
