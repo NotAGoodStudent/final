@@ -17,7 +17,7 @@
             <div class="bg-circle-4 bg-circle"></div>
         </header>
         <!-- Content section 1-->
-        <section id="scroll">
+        <section id="scroll" class="section">
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
@@ -33,7 +33,7 @@
             </div>
         </section>
         <!-- Content section 2-->
-        <section>
+        <section class="section">
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6">
@@ -49,7 +49,7 @@
             </div>
         </section>
         <!-- Content section 3-->
-        <section>
+        <section class="section">
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
@@ -64,5 +64,16 @@
                 </div>
             </div>
         </section>
+        <div class="up d-flex justify-content-center">
+            <img id="up" style="width: 100px; float: right; " src="{{Storage::url('imgs/front/takemeup.png')}}" alt="">
+        </div>
     </div>
+
+    <script>
+
+        $('#up').click(function (){
+            console.log('click')
+            jQuery('html,body').animate({scrollTop:0},100);
+        })
+    </script>
 @endsection

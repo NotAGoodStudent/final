@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 
-});
+})->name('index');
+
+Route::get('/aboutus', function(){
+    return view('aboutus');
+
+})->name('aboutus');
 
 Auth::routes();
 

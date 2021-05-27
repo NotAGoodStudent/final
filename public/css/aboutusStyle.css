@@ -1,0 +1,162 @@
+body{
+    background-color: white;
+}
+.title{
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(7rem + 72px);
+    padding-bottom: 1rem;
+    background-color:rgba(236,159,5, 1);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+.title > h1{
+    text-align: center;
+    color: #fff;
+    font-size: 6rem;
+    font-weight: bold;
+}
+
+
+.note{
+    width: 80%;
+    box-shadow: 0 2px 15px 0px rgb(0 0 0 / 15%);
+    padding: 50px;
+    margin-top: -100px;
+    z-index: 1000;
+}
+.block1{
+    padding-bottom: 25px;
+}
+
+.block1 > h3{
+    font-weight: bold;
+    font-size: 3rem;
+    color: orange;
+}
+
+.block2{
+    padding-bottom: 50px;
+}
+.block2 > h5{
+    font-size: 2rem;
+    color: orange;
+}
+
+.block3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.block3 > button{
+    color: black;
+    background-color: transparent;
+    border: 2px solid orange;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-transform: uppercase;
+    padding: 1.5rem 3rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    border-radius: 50rem;
+}
+
+.block3 > button:hover {
+    color: #fff;
+    background-color: orange;
+    border-color: orange;
+}
+
+.cardt{
+    width: 400px;
+    height: 650px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.6);
+    display: none;
+
+}
+
+.name{
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    padding-top: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.cardt > img{
+    object-fit: cover;
+    width: 400px;
+    height: 500px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.6);
+}
+
+.pos{
+    font-weight: bold;
+    padding-top: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.title2{
+    overflow: hidden;
+    padding-bottom: 10rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+
+
+.title2 > h1{
+    text-align: center;
+    color: orange;
+    font-size: 5rem;
+    font-weight: bold;
+    display: none;
+}
+
+.up > img:hover{
+    cursor: pointer;
+}
+
+@media screen
+and (max-device-width: 1298px)
+and (-webkit-min-device-pixel-ratio: 1) {
+
+    .title2{
+        padding-bottom: 5rem;
+    }
+    .team{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+    }
+    .cardt{
+        margin: 2% auto;
+    }
+
+
+}
+
+@media screen
+and (min-device-width: 1200px)
+and (max-device-width: 1600px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (min-resolution: 192dpi) {
+}
+

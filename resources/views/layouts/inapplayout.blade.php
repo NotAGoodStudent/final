@@ -32,7 +32,11 @@
         <div class="container-fluid">
             <img class="logo" src="{{Storage::url('imgs/front/logo.png')}}" style="height: 50px" alt="">
             <!-- Windows-->
-            <a class="navbar-brand" href="{{route('home')}}" style="margin-left: 10px">DashCube</a>
+            @if(auth()->check())
+                <a class="navbar-brand" href="{{route('home')}}" style="margin-left: 10px">DashCube</a>
+            @else
+                <a class="navbar-brand" href="{{route('index')}}" style="margin-left: 10px">DashCube</a>
+            @endif
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -46,6 +50,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: black" href="{{ route('login') }}">Messages</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" href="{{ route('aboutus') }}">About us</a>
                         </li>
                     @endif
 
@@ -94,8 +102,9 @@
 </div>
 <div class="" style="
   clear: both;
+  bottom: 0;
     position: relative;
-    margin-top: -100px;">
+    margin-top: -20px;">
         <section class="contact-area" id="contact">
             <div class="container">
                 <div class="row">

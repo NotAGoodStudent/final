@@ -8,7 +8,6 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
@@ -32,7 +31,11 @@
             <div class="container-fluid">
                 <img class="logo" src="{{Storage::url('imgs/front/logo.png')}}" style="height: 50px" alt="">
                 <!-- Windows-->
-                <a class="navbar-brand" href="{{route('home')}}" style="margin-left: 10px">DashCube</a>
+                @if(auth()->check())
+                    <a class="navbar-brand" href="{{route('home')}}" style="margin-left: 10px">DashCube</a>
+                @else
+                    <a class="navbar-brand" href="{{route('index')}}" style="margin-left: 10px">DashCube</a>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
