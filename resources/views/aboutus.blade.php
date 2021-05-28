@@ -68,7 +68,7 @@
             </div>
         </div>
     </section>
-    <div class="up d-flex justify-content-center">
+    <div class="up d-flex justify-content-center" id="up">
         <img class="img" id="up" style="width: 100px; float: right; " src="{{Storage::url('imgs/front/takemeup.png')}}" alt="">
     </div>
     </div>
@@ -83,6 +83,7 @@
                     $('.cardt').each(function (x, img){
                         $(this).slideUp( 'slow' ).delay( 'slow' ).fadeIn( 'slow' );
                     });
+                    $('#up>img').slideUp( 'slow' ).delay( 'slow' ).fadeIn( 'slow' );
                 }
             });
         $('#up').click(function (){

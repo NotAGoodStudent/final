@@ -132,6 +132,10 @@ body{
     cursor: pointer;
 }
 
+.up > img{
+    display: none;
+}
+
 @media screen
 and (max-device-width: 1298px)
 and (-webkit-min-device-pixel-ratio: 1) {
