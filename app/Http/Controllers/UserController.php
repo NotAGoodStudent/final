@@ -189,7 +189,7 @@ class UserController extends Controller
                     $match->matcher = auth()->user()->id;
                     $match->matched = $id;
                     $match->save();
-                    Like::where('like_receiver', '=', auth()->user()->id)->delete();
+                    Like::where('like_receiver', '=', auth()->user()->id)->where('like_giver', '=', $id)->delete();
                     return "match happened";
                 }
             }
