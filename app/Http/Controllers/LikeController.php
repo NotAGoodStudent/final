@@ -14,16 +14,18 @@ class LikeController extends Controller
 
     function likeUser($id)
     {
+
         $likes_for_user = Like::where('like_receiver', '=', auth()->user()->id)->get();
         if(count($likes_for_user) > 0){
             foreach ($likes_for_user as $l){
                 if($l->like_giver == $id){
+                    $is_match=true;
                     $match = new Match();
                     $match->matcher = auth()->user()->id;
                     $match->matched = $id;
                     $match->save();
                     Like::where('like_receiver', '=', auth()->user()->id)->where('like_giver', '=', $id)->delete();
-                    return "match happened";
+                    return compact('is_match');
                 }
             }
 
