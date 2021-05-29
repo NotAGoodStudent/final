@@ -179,33 +179,6 @@ class UserController extends Controller
         }
     }
 
-    function likeUser($id)
-    {
-        $likes_for_user = Like::where('like_receiver', '=', auth()->user()->id)->get();
-        if(count($likes_for_user) > 0){
-            foreach ($likes_for_user as $l){
-                if($l->like_giver == $id){
-                    $match = new Match();
-                    $match->matcher = auth()->user()->id;
-                    $match->matched = $id;
-                    $match->save();
-                    Like::where('like_receiver', '=', auth()->user()->id)->where('like_giver', '=', $id)->delete();
-                    return "match happened";
-                }
-            }
-
-        }
-
-        $like = new Like();
-        $like->like_giver = auth()->user()->id;
-        $like->like_receiver = $id;
-        $like->save();
-    }
-
-    function removelikeUser($id){
-        Like::where('like_giver', '=', $id)->where('like_receiver', '=', auth()->user()->id)->delete();
-    }
-
     function getHomeData(){
         if(auth()->user()->interested_in != null)
         {
@@ -213,17 +186,35 @@ class UserController extends Controller
             $likes = Like::all();
             $matches = Match::all();
             $users = null;
+            $users_clear = [];
 
             if (auth()->user()->interested_in == 'Both') {
                 $users = User::where('id', '!=', auth()->user()->id)->where('gender', '=', 'Male')->orWhere('gender', '=', 'Female')->where('interested_in', '=', 'Both')->orWhere('interested_in', '=', auth()->user()->gender)->where('location', '=', auth()->user()->location)->get();
+                foreach($users as $u_key => $u){
+                    if($u->id != auth()->user()->id && $u->location == auth()->user()->location && $u->interested_in == 'Both' || $u->interested_in == auth()->user()->gender ){
+                        array_push($users_clear, $u);
+                    }
+                }
             }
             elseif(auth()->user()->interested_in == 'Male') {
-                $users = User::where('interested_in', '=', auth()->user()->gender)->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->where('location', '=', auth()->user()->location)->get();
+                $users = User::where('interested_in', '=', auth()->user()->gender)->orWhere('interested_in', '=', 'Both')->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->where('location', '=', auth()->user()->location)->get();
+                foreach($users as $u_key => $u){
+                    if($u->id != auth()->user()->id && $u->location == auth()->user()->location && $u->interested_in == 'Both' && $u->gender == auth()->user()->interested_in || $u->id != auth()->user()->id && $u->location == auth()->user()->location && $u->interested_in == auth()->user()->gender && $u->gender == auth()->user()->interested_in ){
+                        array_push($users_clear, $u);
+                    }
+                }
             }
             elseif(auth()->user()->interested_in == 'Female'){
                 $users = User::where('interested_in', '=', auth()->user()->gender)->orWhere('interested_in', '=', 'Both')->where('gender', '=', auth()->user()->interested_in)->where('id', '!=', auth()->user()->id)->where('location', '=', auth()->user()->location)->get();
+                foreach($users as $u_key => $u){
+                    if($u->id != auth()->user()->id && $u->location == auth()->user()->location && $u->interested_in == 'Both' && $u->gender == auth()->user()->interested_in || $u->id != auth()->user()->id && $u->location == auth()->user()->location && $u->interested_in == auth()->user()->gender && $u->gender == auth()->user()->interested_in ){
+                        array_push($users_clear, $u);
+                    }
+                }
             }
-            return compact('users', 'pictures', 'likes', 'matches');
+
+
+            return compact('users_clear', 'pictures', 'likes', 'matches');
         }
     }
 

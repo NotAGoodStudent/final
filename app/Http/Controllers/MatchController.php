@@ -40,4 +40,8 @@ class MatchController extends Controller
         return compact('users_clear', 'pictures', 'matches');
 
     }
+
+    function removeMatch($id){
+        Match::where('matcher', '=', auth()->user()->id)->where('matched', '=', $id)->orWhere('matcher', '=', $id)->where('matched', '=', auth()->user()->id)->delete();
+    }
 }
