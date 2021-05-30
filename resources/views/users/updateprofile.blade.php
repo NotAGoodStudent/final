@@ -6,7 +6,7 @@
             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                 @if(Session::has('alert-' . $msg))
 
-                    <p class="alert alert-{{ $msg }} m-auto"  id="message" style="display: none; width: 500px; text-align: center; position: absolute">{{ Session::get('alert-' . $msg) }}</p>
+                    <p class="alert alert-{{ $msg }}"  id="message" style="display: none; width: 500px; text-align: center; position: absolute; margin: 2%">{{ Session::get('alert-' . $msg) }}</p>
                     <script>
                         $(function(){
                             $("#message").show('slow');
@@ -137,6 +137,10 @@
                 @endif
                 <label for="age">Age</label>
                 <input type="number" id="age" name="age" value="{{auth()->user()->age}}">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter a new password">
+                <label for="password2">Re-enter password</label>
+                <input type="password" id="password2" name="password2" placeholder="Re-enter password">
                 <input type="submit" class="buttonSub" value="Update">
             </div>
         </form>

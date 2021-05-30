@@ -2,53 +2,53 @@
 @extends('layouts.app')
 
 @section('content')
-    <link href="{{ asset('css/loginStyle.css') }}" rel="stylesheet">
-    <div class="m-auto">
-        <div class="card">
-            <form class="box" method="post" id="form" action="{{ route('register') }}">
+    <link href="{{ asset('css/registerStyle.css') }}" rel="stylesheet">
+    <div class="container">
+        <div class="login_container m-auto">
+            <form class="formm" method="POST" action="{{ route('register') }}">
                 @csrf
-                <h1>Register</h1>
-                <p class="text-muted">Create a new user!</p>
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
-                @error('name')
-                <span class="invalid-feedback" role="alert">
+                <div class="content d-flex justify-content-sm-center">
+                    <img src="{{Storage::url('imgs/front/idk.jpg')}}">
+                    <div class="inputs d-flex flex-column" >
+                        <h3 style="text-align: center; padding-bottom: 20px">Sign up</h3>
+                        <input id="name" style="margin-top: 20px" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <input id="surname" style="margin-top: 20px" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus placeholder="Surname">
+                        @error('surname')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <input id="email" style="margin-top: 20px" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert" id="emAlert">
                     <strong>{{ $message }}</strong>
                 </span>
-                @enderror
-                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus placeholder="Surname">
-                @error('surname')
-                <span class="invalid-feedback" role="alert">
+                        @enderror
+                        <input id="password" style="margin-top: 20px" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
-                @enderror
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
-                @error('email')
-                <span class="invalid-feedback" role="alert" id="emAlert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Re-enter password">
-                <input type="number" name="age" id="age" placeholder="age">
-                <label for="gender">My gender is:</label>
-                <select name="gender" id="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-                <br>
-                <a class="forgot text-muted" href={{ route('login') }}>Already have an account?</a>
-                <input type="submit" value="Register">
-                <div class="col-md-12">
-                    <ul class="social-network social-circle">
-                        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#" class="icoGoogle" title="Google +"><i class="fab fa-google-plus"></i></a></li>
-                    </ul>
+                        @enderror
+                        <input id="password_confirmation" style="margin-top: 20px" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Re-enter password">
+                        <input type="number" class="form-control" style="margin-top: 20px" name="age" id="age" placeholder="age">
+                        @error('age')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <select style="margin-top: 20px" class="form-control" name="gender" id="gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <a class="forgot text-muted" style="margin-top: 20px" href={{ route('login') }}>Already have an account?</a>
+                        <input type="submit" style="margin-top: 20px" value="Sign up">
+                    </div>
                 </div>
             </form>
         </div>

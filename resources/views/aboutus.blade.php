@@ -2,6 +2,7 @@
 
 @section('content')
     <link href="{{ asset('css/aboutusStyle.css') }}" rel="stylesheet">
+
     <div class="content">
         <header class="title">
             <h1>ABOUT DASHCUBE</h1>
@@ -18,7 +19,7 @@
                 <br> Why are you here still? join our community and find the person you need</p>
             </div>
             <div class="block3">
-                <button class="">Join!</button>
+                <a class="" href="{{route('register')}}">Join!</a>
             </div>
         </div>
     </section>

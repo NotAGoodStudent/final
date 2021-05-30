@@ -2,6 +2,12 @@
 
 @section('content')
     <link href="{{ asset('css/welcomeStyle.css') }}" rel="stylesheet">
+    <div id="alertCookiePolicy" class="alert-cookie-policy">
+        <div class="alert alert-secondary mb-0 d-flex align-items-center" role="alert">
+            <span class="mr-auto">This website uses cookies to ensure you get the best experience on our website.</span>
+            <button id="btnAcceptCookiePolicy" class="btn btn-primary" style="background-color: transparent; border: 1px solid white" data-dismiss="alert" type="button" aria-label="Close">Accept</button>
+        </div>
+    </div>
     <div class="content">
         <header class="masthead text-center text-white">
             <div class="masthead-content">
@@ -67,9 +73,17 @@
         <div class="up d-flex justify-content-center">
             <img id="up" style="width: 100px; float: right; " src="{{Storage::url('imgs/front/takemeup.png')}}" alt="">
         </div>
+
     </div>
 
     <script>
+
+
+        $('#btnAcceptCookiePolicy').click(function (){
+            $('#alertCookiePolicy').hide('fast');
+        })
+
+        $('#alertCookiePolicy').show('slow');
 
         $('#up').click(function (){
             console.log('click')

@@ -4,6 +4,12 @@ body{
 .center {
 }
 
+.partners{
+    flex-wrap: wrap;
+    top: 0;
+    display: none;
+}
+
 .center > img{
     width: 200px;
     height: 200px;
@@ -14,9 +20,10 @@ body{
 .cardd{
     display: none;
     width: 200px;
-    padding-bottom: 40px;
+    height: 300px;
+    padding: 2%;
     overflow: hidden;
-    margin: auto;
+    margin: 20px 10px;
 }
 
 .cardd > img{
@@ -29,6 +36,22 @@ body{
     box-shadow: 0 0 10px rgba(0,0,0, 0.8);
     transition: 0.25s;
 
+}
+
+#cross{
+    float: left;
+    margin-top: 5px;
+    font-size: 40px;
+    padding: 10px;
+}
+#cross > i{
+    z-index: 100;
+    position: absolute;
+    color: red;
+}
+
+#cross > i:hover{
+    cursor: pointer ;
 }
 .cardd_footer{
     width: 200px;
@@ -97,4 +120,51 @@ body{
 
 .icons > a > i:hover{
     cursor: pointer;
+}
+
+.its_a_match{
+    display: none;
+    width: 100%;
+}
+
+.match_card{
+    float: left;
+    width: 400px;
+    margin: 2%;
+}
+
+.match_card > img{
+    height: 600px;
+    width: 400px;
+    object-fit: cover;
+    position: absolute;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.8);
+}
+
+.match_card2{
+    float: right;
+    width: 400px;
+    margin: 2%;
+}
+
+.match_card2 > img{
+    height: 600px;
+    width: 400px;
+    object-fit: cover;
+    position: absolute;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.8);
+}
+
+.match_card > img{
+    height: 600px;
+    width: 400px;
+    object-fit: cover;
+    position: absolute;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.8);
 }

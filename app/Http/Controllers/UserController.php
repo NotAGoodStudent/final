@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Picture;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use MongoDB\Driver\Session;
@@ -173,6 +174,22 @@ class UserController extends Controller
             }
             $user->interested_in = $request->input('interested_in');
             $user->age = $request->input('age');
+            if($request->input('password') != null){
+                if($request->input('password2') != null){
+                    if($request->input('password2') == $request->input('password')){
+                        $user->password = Hash::make($request->input('password'));
+                    }
+                    else {
+
+                        $request->session()->flash('alert-danger', 'Passwords have to be equal');
+                        return redirect()->route('updateProfile');
+                    }
+                }
+                else{
+                    $request->session()->flash('alert-danger', 'Passwords have to be equal');
+                    return redirect()->route('updateProfile');
+                }
+            }
             $user->save();
             $request->session()->flash('alert-success', 'Data was successfully updated!');
             return redirect()->route('updateProfile');
