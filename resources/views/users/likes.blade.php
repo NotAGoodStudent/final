@@ -27,43 +27,45 @@
                 url: 'http://localhost:3300/user/likeUser/'+id,
                 success: function (data) {
                     var its_a_match = data['is_match'];
-                    if(its_a_match){
-                        $('#partners').children().hide('fast').remove();
+                    if(its_a_match) {
+                        $('#partners').children().hide('fast');
                         $('#partners').hide('fast');
-                        $(`<img class="m-auto" style="width: 600px; height: 200px; display: block" src="http://localhost:3300/storage/imgs/front/itsamatch.png">`).appendTo($('#its_a_match'))
+                        $(`<h1 style="text-align: center;font-family: verdana; color: rgba(0,255,203,255);
+    font-size: 12em;
+    font-weight: 700;
+       text-shadow: -10px 10px 0px #00e6e6,
+                 -20px 20px 0px #01cccc,
+                 -30px 30px 0px #00bdbd; letter-spacing: 1.5px">IT'S A MATCH</h1>`).appendTo($('#its_a_match'))
                         var pic1_added = false;
                         var pic2_added = false;
                         var pic1_path = null;
                         var pic2_path = null;
-                            for(let i = 0; i < pictures.length;i++) {
-                                if(pictures[i].picture_path.includes('photo1') && pictures[i].user_id === id && !pic1_added){
-                                    pic1_added = true;
-                                    pic1_path = pictures[i].picture_path;
-                                }
-                                else if(pictures[i].picture_path.includes('photo1') && pictures[i].user_id === {{auth()->user()->id}} && !pic2_added){
-                                    pic2_added = true;
-                                    pic2_path = pictures[i].picture_path;
-                                }
+                        for (let i = 0; i < pictures.length; i++) {
+                            if (pictures[i].picture_path.includes('photo1') && pictures[i].user_id === id && !pic1_added) {
+                                pic1_added = true;
+                                pic1_path = pictures[i].picture_path;
+                            } else if (pictures[i].picture_path.includes('photo1') && pictures[i].user_id === {{auth()->user()->id}} && !pic2_added) {
+                                pic2_added = true;
+                                pic2_path = pictures[i].picture_path;
+                            }
                         }
                         $(`<div class="d-flex justify-content-sm-between"><div class="match_card" id="match_card${id}"><img src="http://localhost:3300/storage/${pic2_path}" style="" alt=""></div><div class="match_card2" id="match_card${id}"><img src="http://localhost:3300/storage/${pic1_path}" style="" alt=""></div></div>`).appendTo($('#its_a_match'))
-                        $("#its_a_match").children().slideUp( 'slow' ).delay( 'slow' ).fadeIn( 'slow' );
-                        $("#its_a_match").slideUp( 'slow' ).delay( 'slow' ).fadeIn( 'slow' );
-                        $(function(){
-                            setTimeout(function() {
+                        $('#pickedCard').children().remove();
+                        $('#pickedCard').hide();
+                        $("#its_a_match").children().slideUp('slow').delay('slow').fadeIn('slow');
+                        $("#its_a_match").slideUp('slow').delay('slow').fadeIn('slow');
+                        $(function () {
+                            setTimeout(function () {
                                 $("#its_a_match").children().hide('slow');
                                 $("#its_a_match").children().remove();
+                                $('#partners').find('#cardd'+id).remove();
+                                $('#partners').children().slideUp( 'slow' ).delay( 'slow' ).fadeIn( 'slow' );
+                                $('#partners').slideUp( 'slow' ).delay( 'slow' ).fadeIn( 'slow' );
 
                             }, 5000);
                         });
 
                     }
-
-                    $('#pickedCard').children().remove();
-                    $('#pickedCard').hide()
-                    $('#partners').find('#cardd' + id).remove();
-                    $('#partners').children().slideUp('slow').delay('slow').fadeIn('slow');
-                    $('#partners').slideUp('slow').delay('slow').fadeIn('slow');
-
                 },
                 error: function (err){
                     console.log(err);

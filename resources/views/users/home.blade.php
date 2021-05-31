@@ -108,7 +108,12 @@
                     if(its_a_match){
                         $('#partners').children().hide('fast').remove();
                         $('#partners').hide('fast');
-                        $(`<img class="m-auto" style="width: 600px; height: 200px; display: block" src="http://localhost:3300/storage/imgs/front/itsamatch.png">`).appendTo($('#its_a_match'))
+                        $(`<h1 style="text-align: center;font-family: verdana; color: rgba(0,255,203,255);
+    font-size: 12em;
+    font-weight: 700;
+       text-shadow: -10px 10px 0px #00e6e6,
+                 -20px 20px 0px #01cccc,
+                 -30px 30px 0px #00bdbd; letter-spacing: 1.5px">IT'S A MATCH</h1>`).appendTo($('#its_a_match'))
                         var pic1_added = false;
                         var pic2_added = false;
                         var pic1_path = null;
