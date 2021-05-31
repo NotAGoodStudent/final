@@ -19,6 +19,52 @@
     <script>
 
 
+        function nextPhoto(id){
+            console.log('here');
+            let img_path = $('#cardd'+id).find('img').attr('src');
+            console.log(img_path);
+            if(img_path.includes('photo1')){
+                for(let x = 0; x< pictures.length;x++){
+                    if(pictures[x].picture_path.includes('photo2') && pictures[x].user_id === id){
+                        $('#cardd'+id).find('img').attr('src', 'http://localhost:3300/storage/'+pictures[x].picture_path);
+                        break;
+                    }
+                }
+
+            }
+            else if(img_path.includes('photo2')){
+
+                let not_found = false;
+                for(let x = 0; x< pictures.length;x++){
+                    if(pictures[x].picture_path.includes('photo3') && pictures[x].user_id === id){
+                        $('#cardd'+id).find('img').attr('src', 'http://localhost:3300/storage/'+pictures[x].picture_path);
+                        not_found = true;
+                        break;
+                    }
+                }
+
+                if(!not_found){
+                    for(let x = 0; x< pictures.length;x++){
+                        if(pictures[x].picture_path.includes('photo1') && pictures[x].user_id === id){
+                            $('#cardd'+id).find('img').attr('src', 'http://localhost:3300/storage/'+pictures[x].picture_path);
+                            not_found = true;
+                            break;
+                        }
+                    }
+                }
+
+
+            }
+            else if(img_path.includes('photo3')){
+
+                for(let x = 0; x< pictures.length;x++){
+                    if(pictures[x].picture_path.includes('photo1') && pictures[x].user_id === id){
+                        $('#cardd'+id).find('img').attr('src', 'http://localhost:3300/storage/'+pictures[x].picture_path);
+                        break;
+                    }
+                }
+            }
+        }
 
         function checkIfLiked(u){
             if(likes.length > 0){
@@ -81,7 +127,7 @@
                             if (pictures[i].picture_path.includes('photo1') && pictures[i].user_id === users[x].id && !user_is_liked && !user_is_matched) {
                                 console.log('yep');
                                 //$(`<div class="is_match m-auto"><h5 class="is_match m-auto">IT'S A MATCh</h5><img src="http://localhost:3300/storage/${pictures[i].picture_path}" style="width: 100%" alt=""></div>`).appendTo($('#partners'));
-                                $(`<div class="cardd m-auto" id="cardd${users[x].id}" data-id="${users[x].id}"><img src="http://localhost:3300/storage/${pictures[i].picture_path}" style="" alt=""><div class="cardd_footer"><h3><strong>${users[x].name}</strong> ${users[x].age}</h3> <h5 style="color:rgba(235,232,231,255)">${users[x].location}</h5><h5  style="color:rgba(235,232,231,255)">${users[x].bio}</h5></div><div class="icons m-auto d-flex justify-content-between"><a onclick="denyUser(${users[x].id})" href="#"><i style="color: red;padding: 15px; padding-left: 25px;padding-right: 25px;" class="fas fa-times"></i></a><a onclick="likeUser(${users[x].id})"><i style="color: #2ecc71;padding: 17px;" class="fas fa-heart"></i></a></div></div>`).appendTo($('#partners'));
+                                $(`<div class="cardd m-auto" id="cardd${users[x].id}" data-id="${users[x].id}"><img onclick="nextPhoto(${users[x].id})"  src="http://localhost:3300/storage/${pictures[i].picture_path}" style="" alt=""><div class="cardd_footer"><h3><strong>${users[x].name}</strong> ${users[x].age}</h3> <h5 style="color:rgba(235,232,231,255)">${users[x].location}</h5><h5  style="color:rgba(235,232,231,255)">${users[x].bio}</h5></div><div class="icons m-auto d-flex justify-content-between"><a onclick="denyUser(${users[x].id})" href="#"><i style="color: red;padding: 15px; padding-left: 25px;padding-right: 25px;" class="fas fa-times"></i></a><a onclick="likeUser(${users[x].id})"><i style="color: #2ecc71;padding: 17px;" class="fas fa-heart"></i></a></div></div>`).appendTo($('#partners'));
                                 $('#cardd'+users[x].id).show('slow');
                                 added = true;
                                 break;
@@ -128,7 +174,7 @@
                                 pic2_path = pictures[i].picture_path;
                             }
                         }
-                        $(`<div class="d-flex justify-content-sm-between"><div class="match_card" id="match_card${id}"><img src="http://localhost:3300/storage/${pic2_path}" style="" alt=""></div><div class="match_card2" id="match_card${id}"><img src="http://localhost:3300/storage/${pic1_path}" style="" alt=""></div></div>`).appendTo($('#its_a_match'))
+                        $(`<div class="d-flex justify-content-sm-between"><div class="match_card" id="match_card${id}"><img onclick="nextPhoto(${users[x].id}) src="http://localhost:3300/storage/${pic2_path}" style="" alt=""></div><div class="match_card2" id="match_card${id}"><img src="http://localhost:3300/storage/${pic1_path}" style="" alt=""></div></div>`).appendTo($('#its_a_match'))
                         $("#its_a_match").children().slideUp( 'slow' ).delay( 'slow' ).fadeIn( 'slow' );
                         $("#its_a_match").slideUp( 'slow' ).delay( 'slow' ).fadeIn( 'slow' );
                         $(function(){
@@ -223,7 +269,7 @@
                     console.log(user_is_liked);
                     if (pictures[i].picture_path.includes('photo1') && pictures[i].user_id === users[x].id && !userWasLiked &&!user_is_liked && !user_is_matched) {
                         console.log("here");
-                        $(`<div class="cardd m-auto" id="cardd${users[x].id}" data-id="${users[x].id}"><img src="http://localhost:3300/storage/${pictures[i].picture_path}" style="" alt=""><div class="cardd_footer"><h3><strong>${users[x].name}</strong> ${users[x].age}</h3> <h5 style="color:rgba(235,232,231,255)">${users[x].location}</h5><h5 style="color:rgba(235,232,231,255)">${users[x].bio}</h5></div><div class="icons m-auto d-flex justify-content-between"><a onclick="denyUser(${users[x].id})" href="#"><i style="color: red;padding: 15px; padding-left: 25px;padding-right: 25px;" class="fas fa-times"></i></a><a onclick="likeUser(${users[x].id})"><i style="color: #2ecc71;padding: 17px;" class="fas fa-heart"></i></a></div></div>`).appendTo($('#partners'));
+                        $(`<div class="cardd m-auto" id="cardd${users[x].id}" data-id="${users[x].id}"><img onclick="nextPhoto(${users[x].id})" src="http://localhost:3300/storage/${pictures[i].picture_path}" style="" alt=""><div class="cardd_footer"><h3><strong>${users[x].name}</strong> ${users[x].age}</h3> <h5 style="color:rgba(235,232,231,255)">${users[x].location}</h5><h5 style="color:rgba(235,232,231,255)">${users[x].bio}</h5></div><div class="icons m-auto d-flex justify-content-between"><a onclick="denyUser(${users[x].id})" href="#"><i style="color: red;padding: 15px; padding-left: 25px;padding-right: 25px;" class="fas fa-times"></i></a><a onclick="likeUser(${users[x].id})"><i style="color: #2ecc71;padding: 17px;" class="fas fa-heart"></i></a></div></div>`).appendTo($('#partners'));
                         $('#cardd'+users[x].id).show('slow');
                         added = true;
                         break;

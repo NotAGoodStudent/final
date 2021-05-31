@@ -21,7 +21,7 @@ class UserController extends Controller
     {
 
         $rules = array(
-            'image' => 'mimes:jpeg,jpg,png|required|max:10000' // max 10000kb
+            'image' => 'mimes:jpeg,jpg,png|required|max:20000' // max 10000kb
         );
 
 
@@ -68,7 +68,7 @@ class UserController extends Controller
                     if(count($pictures) >= 1){
                         foreach ($pictures as $p){
                             if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo1.".'png' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo1.".'jpg' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo1.".'jpeg'){
-                                Picture::where('picture_path', '=', '/imgs/pfp/'.auth()->user()->id."/photo1.".$extension)->delete();
+                                Picture::where('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo1.'.'png')->orWhere('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo1.'.'jpg')->orWhere('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo1.'.'jpeg')->delete();
                                 Storage::delete($p->picture_path);
                                 break;
                             }
@@ -89,12 +89,16 @@ class UserController extends Controller
 
 
                 }
+                else{
+                    $request->session()->flash('alert-danger', 'The uploaded file is not an image');
+                    return redirect()->route('updateProfile');
+                }
             }
 
             if($request->file('photo2') != null){
                 //add photo
 
-                echo 'is not null';
+                echo 'is not null XD';
                 $picture = new Picture();
                 $extension = $request->file('photo2')->extension();
                 if($this->isImage($request->file('photo2')))
@@ -102,11 +106,13 @@ class UserController extends Controller
 
                     echo 'is image  ';
                     $pictures = Picture::where('user_id', '=', auth()->user()->id)->get();
-                    if(count($pictures) >= 1){
+                    if(count($pictures) > 0){
+                        echo 'here';
                         foreach ($pictures as $p){
                             if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo2.".'png' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo2.".'jpg' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo2.".'jpeg'){
-                                Picture::where('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo2.'.$extension)->delete();
+                                Picture::where('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo2.'.'png')->orWhere('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo2.'.'jpg')->orWhere('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo2.'.'jpeg')->delete();
                                 Storage::delete($p->picture_path);
+                                echo 'deleted';
                                 break;
                             }
                         }
@@ -126,6 +132,10 @@ class UserController extends Controller
 
 
                 }
+            }
+            else{
+                $request->session()->flash('alert-danger', 'The uploaded file is not an image');
+                return redirect()->route('updateProfile');
             }
 
             if($request->file('photo3') != null){
@@ -142,7 +152,7 @@ class UserController extends Controller
                     if(count($pictures) >= 1){
                         foreach ($pictures as $p){
                             if($p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo3.".'png' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo3.".'jpg' || $p->picture_path == '/imgs/pfp/'. auth()->user()->id."/photo3.".'jpeg'){
-                                Picture::where('picture_path', '=', '/imgs/pfp/'. auth()->user()->id."/photo3.".$extension)->delete();
+                                Picture::where('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo3.'.'png')->orWhere('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo3.'.'jpg')->orWhere('picture_path', '=', '/imgs/pfp/'.auth()->user()->id.'/photo3.'.'jpeg')->delete();
                                 Storage::delete($p->picture_path);
                                 break;
                             }
@@ -163,6 +173,10 @@ class UserController extends Controller
 
 
 
+                }
+                else{
+                    $request->session()->flash('alert-danger', 'The uploaded file is not an image');
+                    return redirect()->route('updateProfile');
                 }
             }
 

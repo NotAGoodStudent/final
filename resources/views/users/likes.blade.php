@@ -21,6 +21,36 @@
 
     <script>
 
+        function nextPhoto(id){
+            console.log('here');
+            let img_path = $('#cardd'+id).find('img').attr('src');
+            console.log(img_path);
+            if(img_path.includes('photo1')){
+                for(let x = 0; x< pictures.length;x++){
+                    if(pictures[x].picture_path.includes('photo2') && pictures[x].user_id === id){
+                        $('#cardd'+id).find('img').attr('src', 'http://localhost:3300/storage/'+pictures[x].picture_path);
+                    }
+                }
+
+            }
+            else if(img_path.includes('photo2')){
+
+                for(let x = 0; x< pictures.length;x++){
+                    if(pictures[x].picture_path.includes('photo3') && pictures[x].user_id === id){
+                        $('#cardd'+id).find('img').attr('src', 'http://localhost:3300/storage/'+pictures[x].picture_path);
+                    }
+                }
+            }
+            else if(img_path.includes('photo3')){
+
+                for(let x = 0; x< pictures.length;x++){
+                    if(pictures[x].picture_path.includes('photo1') && pictures[x].user_id === id){
+                        $('#cardd'+id).find('img').attr('src', 'http://localhost:3300/storage/'+pictures[x].picture_path);
+                    }
+                }
+            }
+        }
+
         function likeUser(id) {
             $.ajax({
                 //url: 'http://ec2-3-236-81-152.compute-1.amazonaws.com:3300/topics/getTopics',
@@ -108,13 +138,15 @@
             $('#cardd'+id).find('.cardd_footer').remove();
             for(let x = 0; x < users.length;x++){
                 if(users[x].id == id){
-                    $(`<div class="escape"><a onclick="escape(${id})" id="cross"><i class="fas fa-times"></i></a></div><div class="cardd_sel_footer"><h3><strong>${users[x].name}</strong> ${users[x].age}</h3> <h5 style="color:rgba(235,232,231,255)">${users[x].location}</h5><h5  style="color:rgba(235,232,231,255)">${users[x].bio}</h5></div>`).appendTo($('#cardd'+id));
+                    $(`<div class="escape"><a onclick="escape(${id})" id="cross"><i class="fas fa-times"></i></a></div><div class="cardd_sel_footer"><h3 style="color: white"><strong style="color: white">${users[x].name}</strong> ${users[x].age}</h3> <h5 style="color:rgba(235,232,231,255)">${users[x].location}</h5><h5  style="color:rgba(235,232,231,255)">${users[x].bio}</h5></div>`).appendTo($('#cardd'+id));
                 }
             }
             $('#cardd'+id).addClass('cardd_sel m-auto')
             $('#cardd'+id).appendTo($('#pickedCard'));
             $('#partners').children().hide('slow');
             $('#partners').hide('slow');
+            $('#pickedCard').find('#cardd'+id).unbind('click')
+            $('#pickedCard').find('#cardd'+id).bind('click', nextPhoto(id))
             $('#pickedCard').show('slow');
         }
         $.ajax({

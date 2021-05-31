@@ -65,7 +65,7 @@
             $('#cardd'+id).find('.cardd_footer').remove();
             for(let x = 0; x < users.length;x++){
                 if(users[x].id == id){
-                    $(`<div class="escape"><a onclick="escape(${id})" id="cross"><i class="fas fa-times"></i></a></div><div class="cardd_sel_footer"><h3><strong>${users[x].name}</strong> ${users[x].age}</h3> <h5 style="color:rgba(235,232,231,255)">${users[x].location}</h5><h5  style="color:rgba(235,232,231,255)">${users[x].bio}</h5></div>`).appendTo($('#cardd'+id));
+                    $(`<div class="escape"><a onclick="escape(${id})" id="cross"><i class="fas fa-times"></i></a></div><div class="cardd_sel_footer"><h3 style="color: white"><strong>${users[x].name}</strong> ${users[x].age}</h3> <h5 style="color:rgba(235,232,231,255)">${users[x].location}</h5><h5  style="color:rgba(235,232,231,255)">${users[x].bio}</h5></div>`).appendTo($('#cardd'+id));
                 }
             }
             $('#cardd'+id).addClass('cardd_sel m-auto')
